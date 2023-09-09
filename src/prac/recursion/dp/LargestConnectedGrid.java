@@ -27,7 +27,7 @@ public class LargestConnectedGrid {
 		int row = arr.length;
 		int col = arr[0].length;
 		int largestCount = 1;
-		int largestConnectedValue = -99;
+		int largestConnectedValue = Integer.MIN_VALUE;
 		
 		for(int i=0; i < row; i++){
 			for(int j=0; j < col; j++){
