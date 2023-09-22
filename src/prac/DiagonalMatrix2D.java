@@ -40,6 +40,15 @@ public class DiagonalMatrix2D {
 		}
 		
 		
+		int columnsDistance = Math.abs(posCol1 - posCol2);
+        int rowsDistance = Math.abs(posRow2 - posRow1);
+        // cannot build on the same diagonal
+        if (columnsDistance == rowsDistance) {
+        	System.out.println(String.format("Elements (%s, %s) are on the same diagonal", ele1, ele2));
+        } else {
+			System.out.println(String.format("Elements (%s, %s) are NOT on the same diagonal", ele1, ele2));
+		}
+		
 	}
 
 	public static void main(String[] args) {
@@ -50,8 +59,10 @@ public class DiagonalMatrix2D {
 			                { 81, 31, 83, 53, 10 },
 			                { 12, 9, 85, 80, 7 } };
 		
-		int x = 42;
-	    int y = 80;
+//		int x = 42;
+//	    int y = 80;
+		int x = 33;
+	    int y = 83;
 	    int x1 = 2;
 	    int y1 = 8;
 	 

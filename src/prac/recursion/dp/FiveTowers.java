@@ -2,7 +2,6 @@ package prac.recursion.dp;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,23 +15,55 @@ import java.util.Set;
  */
 public class FiveTowers {
 
-	private static boolean canbuild(int currRow, int currCol, int len, Set<Integer[]> towerPositions ){
-		if(towerPositions.contains(currCol)){
+	/**
+	 * DOES NOT WORK
+	 */
+	private static boolean isDiagonalElement(int currRow, int currCol, int row, int filledCol) {
+		int filledPosition = Math.abs(row - filledCol);
+		int postitionToCheck = Math.abs(currRow - currCol);
+		int filledPosition1 = row + filledCol;
+		int postitionToCheck1 = currRow + currCol;
+		if(filledPosition == postitionToCheck || filledPosition1 == postitionToCheck1){
 			return false;
 		}
-		//TODO
+		
 		return true;
 	}
 	
-	private static void allPossibleLocations(int row, Integer[] col, Set<Integer[]> towerPositions){
+	private static boolean canBuild(Integer[] columns, int nextRow, int nextColumn) {
 		
-	
-		for(int i=0; i< col.length; i++){
-			if(canbuild(row, i, col.length, towerPositions)){
-				col[row] = i;
-				towerPositions.add(col);
+		
+		for(int currentRow = 0; currentRow < nextRow ;  currentRow++){
+			int currentCol = columns[currentRow];
+			if( currentCol ==  nextColumn){
+				return false;
+			}
+			
+			int colPos =  Math.abs(currentCol - nextColumn);
+			int rowPos = nextRow - currentRow;
+			
+			if(colPos == rowPos){
+				return false;
 			}
 		}
+		return true;
+	}
+	
+	private static void allPossibleLocations(int row, Integer[] columns, Set<Integer[]> towerPositions){
+		
+		if(row == columns.length){
+			System.out.println(Arrays.toString(columns));
+			towerPositions.add(columns);
+			return;
+		} 
+		
+		for(int col=0; col< columns.length; col++){
+			if(canBuild(columns, row, col)){
+				columns[row]=col;
+				allPossibleLocations(row+1, columns, towerPositions);
+			}
+		}
+		
 	}
 	
 	public static void main(String[] args) {
