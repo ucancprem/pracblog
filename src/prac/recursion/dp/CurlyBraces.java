@@ -21,23 +21,19 @@ public class CurlyBraces {
 	
 	private static void combinationOfBraces(int remainingLeftBraces, int remainingRightBraces, String currentCombination){
 						
-		if(remainingRightBraces < remainingLeftBraces){ //Prevent cases of adding a left brace after all right braces are added.
+		if(remainingRightBraces < remainingLeftBraces ||  remainingLeftBraces < 0){ //Prevent cases of adding a left brace after all right braces are added.
 			return;
 		}
 		if(currentCombination.length() == numberOfBraces * 2){
 			combinationOfBraces.add(currentCombination);
 			return;
 		}
-		if(remainingLeftBraces > 0){
-			int leftRemaining =  remainingLeftBraces - 1;
-			combinationOfBraces(leftRemaining, remainingRightBraces, currentCombination + LEFT_BRACE);
-		}
-		if(remainingRightBraces > 0){
-			int rightRemaining =  remainingRightBraces - 1;
-			combinationOfBraces(remainingLeftBraces, rightRemaining, currentCombination + RIGHT_BRACE);
-		}
+		//if(remainingLeftBraces > 0) //moved to initial check
+			combinationOfBraces(remainingLeftBraces - 1, remainingRightBraces, currentCombination + LEFT_BRACE);
+
+		//if(remainingRightBraces > 0)
+			combinationOfBraces(remainingLeftBraces, remainingRightBraces - 1, currentCombination + RIGHT_BRACE);
 		
-		//System.out.println("returnning "+currentCombination+" after ("+remainingLeftBraces+","+remainingRightBraces+")");
 	}
 	
 	public static void main(String[] args) {
